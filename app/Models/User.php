@@ -9,9 +9,14 @@ use App\Models\Manager\MultipleTouches;
 use App\Models\Manager\Recharging;
 use App\Models\Manager\TBalance;
 use App\Models\Manager\Trophy;
+use App\Models\Pivot\PlayerEnergy;
+use App\Models\Pivot\PlayerMulti;
+use App\Models\Pivot\PlayerRecharging;
+use App\Models\Pivot\PlayerTrophy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -99,4 +104,51 @@ class User extends Authenticatable
         );
     }
 
+
+    public function getEnergyUserId():HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Energy::class,
+            PlayerEnergy::class,
+            'player_id',
+            'id', // energy.id
+            'id', // user.id
+            'energy_id'
+        );
+    }
+    public function getRechargingUserId():HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Recharging::class,
+            PlayerRecharging::class,
+            'player_id',
+            'id', // recharging.id
+            'id', // user.id
+            'recharging_id'
+        );
+    }
+
+    public function getTrophyUserId():HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Trophy::class,
+            PlayerTrophy::class,
+            'player_id',
+            'id', // recharging.id
+            'id', // user.id
+            'trophy_id'
+        );
+    }
+
+    public function getMultiUserId():HasOneThrough
+    {
+        return $this->hasOneThrough(
+            MultipleTouches::class,
+            PlayerMulti::class,
+            'player_id',
+            'id', // recharging.id
+            'id', // user.id
+            'multiple_touche_id'
+        );
+    }
 }

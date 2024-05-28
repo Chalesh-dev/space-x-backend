@@ -38,6 +38,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
 
 Route::middleware('ActivityByUser')->prefix('landing')->name('landing.')->group(function () {
     Route::get('info-trophy', [InfoUserController::class, 'trophy'])->name('info-trophy');
+    Route::get('all-trophy', [InfoUserController::class, 'all'])->name('all-trophy');
     Route::get('info-energy', [InfoUserController::class, 'energy'])->name('info-energy');
     Route::get('info-multi', [InfoUserController::class, 'multi'])->name('info-multi');
     Route::get('info-t_balance', [InfoUserController::class, 't_balance'])->name('info-t_balance');
@@ -65,4 +66,6 @@ Route::middleware('ActivityByUser')->prefix('level-up')->name('up.')->group(func
 
 Route::middleware('ActivityByUser')->prefix('data')->name('data.')->group(callback: function () {
     Route::post('/get-data', [GetDataController::class, 'index']);
+    Route::get('/get-data', [GetDataController::class, 'get_data']);
+    Route::get('/get-test', [GetDataController::class, 'test']);
 });

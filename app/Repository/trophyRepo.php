@@ -15,13 +15,14 @@ class trophyRepo
 
     public function index()
     {
-        return $this->query->with('soft_delete')->paginate();
+        return $this->query->paginate();
     }
 
     public function create($data)
     {
         return $this->query->create([
             'title' => $data['title'],
+            'amount' => $data[ 'amount'],
             'player_id' => 1,
         ]);
     }
@@ -35,6 +36,7 @@ class trophyRepo
     {
         return $this->query->where('id', $id)->update([
             'title' => $data['title'],
+            'amount' => $data[ 'amount'],
             'player_id' => 1,
         ]);
     }

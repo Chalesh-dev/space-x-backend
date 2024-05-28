@@ -21,6 +21,8 @@ return new class extends Migration
                 ->constrained('energies')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->string('energyLast')->default(0)->nullable();
+            $table->string('energy_time')->default(0)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
